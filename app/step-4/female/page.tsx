@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { Button } from "@/components/ui/button"
 import { X, Lock, CheckCheck, MapPin, AlertTriangle } from "lucide-react"
 import Image from "next/image"
 
@@ -37,8 +36,12 @@ const RealtimeMap = ({ lat, lng, city, country }: { lat: number; lng: number; ci
             <span>SUSPICIOUS ACTIVITY DETECTED</span>
           </div>
           {/* Exibe a localização dinâmica recebida pelas props */}
-          <p className="text-sm text-gray-200">Location: {city}, {country}</p>
-          <p className="text-sm text-gray-200">Coordinates: {lat.toFixed(4)}, {lng.toFixed(4)}</p>
+          <p className="text-sm text-gray-200">
+            Location: {city}, {country}
+          </p>
+          <p className="text-sm text-gray-200">
+            Coordinates: {lat.toFixed(4)}, {lng.toFixed(4)}
+          </p>
           <p className="text-xs text-gray-300">Device was tracked to this area</p>
         </div>
       </div>
@@ -81,7 +84,8 @@ const ChatPopup = ({
             <Image
               src={
                 profilePhoto ||
-                "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI="
+                "https://media.istockphoto.com/id/1337144146/vector/default-avatar-profile-icon-vector.jpg?s=612x612&w=0&k=20&c=BIbFwuv7FxTWvh5S3vB6bkT0Qv8Vn8N5Ffseq84ClGI=" ||
+                "/placeholder.svg"
               }
               alt="Profile"
               width={40}
@@ -133,7 +137,8 @@ const ChatPopup = ({
   )
 }
 
-export default function Step4Female() { // Nome do componente ajustado para Step4Female
+export default function Step4Female() {
+  // Nome do componente ajustado para Step4Female
   const [profilePhoto, setProfilePhoto] = useState<string | null>(null)
   const [selectedConvoIndex, setSelectedConvoIndex] = useState<number | null>(null)
 
@@ -162,34 +167,34 @@ export default function Step4Female() { // Nome do componente ajustado para Step
     // =======================================================
     const fetchLocation = async () => {
       try {
-        const response = await fetch('/api/location');
+        const response = await fetch("/api/location")
 
         if (!response.ok) {
-          throw new Error(`A resposta da nossa API interna não foi ok. Status: ${response.status}`);
+          throw new Error(`A resposta da nossa API interna não foi ok. Status: ${response.status}`)
         }
 
-        const data = await response.json();
-        
+        const data = await response.json()
+
         if (data.lat && data.lon) {
           setLocation({
             lat: data.lat,
             lng: data.lon,
             city: data.city,
             country: data.country,
-          });
+          })
         } else {
-          console.warn("API interna não retornou os dados esperados.", data.error);
-          setLocation(defaultLocation);
+          console.warn("API interna não retornou os dados esperados.", data.error)
+          setLocation(defaultLocation)
         }
       } catch (error) {
-        console.error("Falha ao buscar localização da API interna:", error);
-        setLocation(defaultLocation);
+        console.error("Falha ao buscar localização da API interna:", error)
+        setLocation(defaultLocation)
       } finally {
-        setIsLoadingLocation(false);
+        setIsLoadingLocation(false)
       }
-    };
+    }
 
-    fetchLocation();
+    fetchLocation()
   }, [])
 
   // Seus dados estáticos (com caminhos de imagem para 'female')
@@ -340,16 +345,21 @@ export default function Step4Female() { // Nome do componente ajustado para Step
           </p>
 
           <div className="grid grid-cols-3 gap-3">
-            {femaleImages.map((image, index) => ( // Ajustado para usar femaleImages
-              <div key={index} className="aspect-square relative rounded-lg overflow-hidden">
-                <Image
-                  src={image || "/placeholder.svg"}
-                  alt={`Recovered media ${index + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-            ))}
+            {femaleImages.map(
+              (
+                image,
+                index, // Ajustado para usar femaleImages
+              ) => (
+                <div key={index} className="aspect-square relative rounded-lg overflow-hidden">
+                  <Image
+                    src={image || "/placeholder.svg"}
+                    alt={`Recovered media ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ),
+            )}
           </div>
         </div>
 
@@ -386,7 +396,7 @@ export default function Step4Female() { // Nome do componente ajustado para Step
             <h2 className="text-lg font-semibold text-gray-800">Suspicious Location</h2>
           </div>
           <p className="text-sm text-gray-600 mb-4">The device location was tracked. Check below:</p>
-          
+
           {/* ======================================================= */}
           {/*     MUDANÇA 4: Renderização condicional do mapa.          */}
           {/* ======================================================= */}
@@ -420,13 +430,28 @@ export default function Step4Female() { // Nome do componente ajustado para Step
           </div>
 
           <div className="space-y-4 text-sm text-gray-600">
-            <p><strong>You have reached the end of your free consultation.</strong> I know you're tired of guessing and want some real answers.</p>
-            <p>Our satellite tracking system is the most advanced technology to find out what’s going on. But there’s a catch: keeping the satellites and servers running 24/7 is expensive.</p>
+            <p>
+              <strong>You have reached the end of your free consultation.</strong> I know you're tired of guessing and
+              want some real answers.
+            </p>
+            <p>
+              Our satellite tracking system is the most advanced technology to find out what’s going on. But there’s a
+              catch: keeping the satellites and servers running 24/7 is expensive.
+            </p>
             <p>That’s why, unfortunately, we can’t provide more than 5% of the information we uncover for free.</p>
             <p>The good news? You don’t have to spend a fortune to hire a private investigator.</p>
-            <p>We’ve developed an app that puts that same technology in your hands and lets you track everything discreetly and efficiently on your own.</p>
-            <p>And the best part? The costs are a fraction of what you’d pay for an investigator – just enough to keep our satellites and system running.</p>
-            <p>It’s time to stop guessing and find out the truth. The answers are waiting for you. Click now and get instant access – before it’s too late!</p>
+            <p>
+              We’ve developed an app that puts that same technology in your hands and lets you track everything
+              discreetly and efficiently on your own.
+            </p>
+            <p>
+              And the best part? The costs are a fraction of what you’d pay for an investigator – just enough to keep
+              our satellites and system running.
+            </p>
+            <p>
+              It’s time to stop guessing and find out the truth. The answers are waiting for you. Click now and get
+              instant access – before it’s too late!
+            </p>
           </div>
         </div>
 
@@ -437,13 +462,25 @@ export default function Step4Female() { // Nome do componente ajustado para Step
           <div className="text-4xl font-bold mb-4 text-center">$47</div>
 
           <div className="space-y-2 text-sm mb-6 text-left">
-            <div className="flex items-center gap-4"><img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" /><span>This person recently communicated whith 3 people from (IP)</span></div>
-            <div className="flex items-center gap-4"><img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" /><span>Our AI detected a suspicious message</span></div>
-            <div className="flex items-center gap-4"><img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" /><span>It was deteced that this person viewed the status of contact ****** 6 times today</span></div>
-            <div className="flex items-center gap-4"><img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" /><span>It was detected that this person archived 2 conversations yesterday</span></div>
+            <div className="flex items-center gap-4">
+              <img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" />
+              <span>This person recently communicated whith 3 people from (IP)</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" />
+              <span>Our AI detected a suspicious message</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" />
+              <span>It was deteced that this person viewed the status of contact ****** 6 times today</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <img src="/images/icone-check.png" alt="Ícone de verificação" className="h-8 w-8" />
+              <span>It was detected that this person archived 2 conversations yesterday</span>
+            </div>
           </div>
           <a
-            href="https://pay.mundpay.com/01982eae-80c3-70d5-ac4c-5d97f149e0e3?ref="
+            href="https://pay.mundpay.com/01982eae-80c3-70d5-ac4c-5d97f149e0e3?ref=ref_687e876c27c90"
             target="_blank"
             rel="noopener noreferrer"
             className="block w-full rounded-full bg-[#26d366] py-3 text-lg font-bold text-white text-center shadow-[0_4px_12px_rgba(38,211,102,0.3)] transition duration-150 ease-in-out hover:bg-[#22b858] hover:shadow-lg"
