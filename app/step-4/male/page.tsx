@@ -1,270 +1,163 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Progress } from "@/components/ui/progress"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
-import { Download, MapPin, MessageSquare, ImageIcon, Key, CheckCircle, MenuIcon } from "lucide-react"
-import { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
+import { CheckCircle, MapPin, MessageSquare, ImageIcon, Key } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
 
-export default function Step4Male() {
-  const [progress, setProgress] = useState(0)
-  const [loadingText, setLoadingText] = useState("Analyzing conversations...")
-  const [showReport, setShowReport] = useState(false)
-  const router = useRouter()
-
-  useEffect(() => {
-    const texts = [
-      "Analyzing conversations...",
-      "Recovering deleted media...",
-      "Identifying suspicious keywords...",
-      "Locating device...",
-      "Generating comprehensive report...",
-    ]
-    let i = 0
-    const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev < 100) {
-          const newProgress = prev + 20
-          if (newProgress <= 100) {
-            setLoadingText(texts[i])
-            i++
-          }
-          return newProgress
-        }
-        clearInterval(interval)
-        setShowReport(true)
-        return 100
-      })
-    }, 1000) // Simulate loading
-
-    return () => clearInterval(interval)
-  }, [])
-
-  const handleDownloadReport = () => {
-    // Simulate report download
-    alert("Report downloaded successfully!")
-  }
-
-  const handleGoToCheckout = () => {
-    // Navigate to checkout page
-    window.location.href = "https://pay.mundpay.com/01982eae-80c3-70d5-ac4c-5d97f149e0e3?ref=ref_687e876c27c90"
-  }
+export default function MaleReportPage() {
+  const checkoutLink = "https://pay.mundpay.com/01982eae-80c3-70d5-ac4c-5d97f1490e3?ref=ref_687e876c27c90"
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
-      {/* Header */}
-      <header className="flex justify-between items-center p-4">
-        <Button variant="ghost" size="icon" className="text-gray-600">
-          <MenuIcon className="h-6 w-6" />
-        </Button>
-        <Button size="icon" className="bg-green-500 hover:bg-green-600 text-white rounded-full h-12 w-12">
-          <Download className="h-6 w-6" />
-        </Button>
-      </header>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center py-8 px-4">
+      <Card className="w-full max-w-4xl shadow-lg">
+        <CardHeader className="text-center">
+          <CardTitle className="text-3xl font-bold text-green-600 flex items-center justify-center gap-2">
+            <CheckCircle className="h-8 w-8" />
+            Report Generated Successfully!
+          </CardTitle>
+          <CardDescription className="text-gray-600 mt-2">
+            Your comprehensive report is ready. Discover the insights below.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-8">
+          {/* Conversation Analysis */}
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <MessageSquare className="h-6 w-6 text-blue-500" />
+              Conversation Analysis
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Most Frequent Contacts</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-5 text-gray-700">
+                    <li>Carlos (480 messages)</li>
+                    <li>Sofia (300 messages)</li>
+                    <li>Pedro (250 messages)</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Conversation Patterns</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700">High activity between 11 PM and 3 AM with new contacts.</p>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center justify-center px-4 py-8">
-        {!showReport ? (
-          <Card className="w-full max-w-md text-center p-6">
-            <CardHeader>
-              <CardTitle className="text-2xl font-bold text-gray-800">Generating Report</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="mb-6">
-                <Progress value={progress} className="w-full" />
-                <p className="mt-2 text-gray-600">{loadingText}</p>
-              </div>
-              <div className="flex justify-center">
-                <Image
-                  src="/public/images/male/3.png"
-                  alt="Loading animation"
-                  width={200}
-                  height={200}
-                  className="animate-pulse"
-                />
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="w-full max-w-3xl p-6">
-            <CardHeader className="text-center">
-              <CardTitle className="text-3xl font-bold text-gray-800 mb-2">Comprehensive Report</CardTitle>
-              <p className="text-gray-600">Detailed analysis of suspicious activity.</p>
-            </CardHeader>
-            <CardContent className="space-y-8">
-              {/* Conversation Analysis */}
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2 mb-4">
-                  <MessageSquare className="h-6 w-6 text-blue-500" />
-                  Conversation Analysis
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <h3 className="font-medium text-gray-700">
-                      Total Messages: <span className="font-bold">12,345</span>
-                    </h3>
-                    <p className="text-sm text-gray-500">Analyzed conversations for unusual patterns.</p>
-                  </div>
-                  <div className="bg-blue-50 p-4 rounded-lg">
-                    <h3 className="font-medium text-gray-700">
-                      Suspicious Conversations: <span className="font-bold">47</span>
-                    </h3>
-                    <p className="text-sm text-gray-500">Identified conversations with high-risk content.</p>
-                  </div>
-                </div>
-              </div>
+          <Separator />
 
-              <Separator />
-
-              {/* Recovered Media */}
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2 mb-4">
-                  <ImageIcon className="h-6 w-6 text-purple-500" />
-                  Recovered Media
-                </h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          {/* Recovered Media */}
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <ImageIcon className="h-6 w-6 text-purple-500" />
+              Recovered Media
+            </h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {[
+                "/images/male/3.png",
+                "/images/male/4.png",
+                "/images/male/5.png",
+                "/images/male/6.png",
+                "/images/male/7.png",
+                "/images/male/8.png",
+                "/images/male/9.png",
+                "/images/male/303.png",
+                "/images/male/331.png",
+              ].map((src, index) => (
+                <div key={index} className="relative w-full h-32 rounded-lg overflow-hidden shadow-md">
                   <Image
-                    src="/public/images/male/3.png"
-                    alt="Recovered Image 1"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/4.png"
-                    alt="Recovered Image 2"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/5.png"
-                    alt="Recovered Image 3"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/6.png"
-                    alt="Recovered Image 4"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/7.png"
-                    alt="Recovered Image 5"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/8.png"
-                    alt="Recovered Image 6"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/9.png"
-                    alt="Recovered Image 7"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                  <Image
-                    src="/public/images/male/303.png"
-                    alt="Recovered Image 8"
-                    width={150}
-                    height={150}
-                    className="rounded-lg object-cover"
-                  />
-                </div>
-              </div>
-
-              <Separator />
-
-              {/* Suspicious Keywords */}
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2 mb-4">
-                  <Key className="h-6 w-6 text-red-500" />
-                  Suspicious Keywords
-                </h2>
-                <ul className="list-disc list-inside space-y-1 text-gray-700">
-                  <li>"Secret" - 15 mentions</li>
-                  <li>"Meetup" - 10 mentions</li>
-                  <li>"Delete chat" - 8 mentions</li>
-                  <li>"Hidden" - 7 mentions</li>
-                </ul>
-              </div>
-
-              <Separator />
-
-              {/* Device Location */}
-              <div>
-                <h2 className="text-2xl font-semibold text-gray-800 flex items-center gap-2 mb-4">
-                  <MapPin className="h-6 w-6 text-green-500" />
-                  Device Location
-                </h2>
-                <div className="relative h-64 w-full rounded-lg overflow-hidden">
-                  <Image
-                    src="/placeholder.svg?height=400&width=600"
-                    alt="Device Location Map"
+                    src={src || "/placeholder.svg"}
+                    alt={`Recovered media ${index + 1}`}
                     layout="fill"
                     objectFit="cover"
-                    className="rounded-lg"
+                    className="hover:scale-105 transition-transform duration-300"
                   />
-                  <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center text-white text-lg font-bold">
-                    Map data available in Premium Report
-                  </div>
                 </div>
-              </div>
+              ))}
+            </div>
+          </section>
 
-              <Separator />
+          <Separator />
 
-              {/* Exclusive Discount */}
-              <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded-lg flex items-center gap-4">
-                <CheckCircle className="h-8 w-8 text-yellow-600" />
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800">Exclusive Discount!</h3>
-                  <p className="text-gray-700">Unlock full features and detailed reports with a 30% discount.</p>
+          {/* Suspicious Keywords */}
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <Key className="h-6 w-6 text-red-500" />
+              Suspicious Keywords
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Keywords Found</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="list-disc pl-5 text-gray-700">
+                    <li>"Hidden" (12 times)</li>
+                    <li>"Meetup" (9 times)</li>
+                    <li>"Clear history" (7 times)</li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Contextual Analysis</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700">
+                    Keywords frequently appear in encrypted chats or with unsaved numbers.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+
+          <Separator />
+
+          {/* Device Location */}
+          <section>
+            <h2 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center gap-2">
+              <MapPin className="h-6 w-6 text-green-500" />
+              Device Location
+            </h2>
+            <Card>
+              <CardContent className="p-0">
+                <div className="w-full h-64 bg-gray-200 flex items-center justify-center rounded-b-lg">
+                  <Image
+                    src="/placeholder.svg?height=256&width=500"
+                    alt="Device Location Map"
+                    width={500}
+                    height={256}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
-              </div>
-
-              <div className="text-center mt-8">
-                <Button
-                  onClick={handleGoToCheckout}
-                  className="w-full max-w-xs h-12 bg-green-600 hover:bg-green-700 text-white text-lg font-bold rounded-full"
-                >
-                  Go to Checkout
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="pb-8 px-4">
-        <div className="text-center space-y-4">
-          <div className="flex justify-center space-x-8 text-sm">
-            <Link href="#" className="text-blue-500 hover:underline">
-              Privacy Policy
-            </Link>
-            <Link href="#" className="text-blue-500 hover:underline">
-              Terms of Use
-            </Link>
-            <Link href="#" className="text-blue-500 hover:underline">
-              Email Support
-            </Link>
+              </CardContent>
+            </Card>
+          </section>
+        </CardContent>
+        <CardFooter className="flex flex-col items-center pt-8">
+          <div className="text-center mb-6">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">Exclusive Discount!</h3>
+            <p className="text-gray-600">
+              Unlock full access to all features and continuous monitoring for just{" "}
+              <span className="font-bold text-green-600">$29.99</span>!
+            </p>
           </div>
-          <p className="text-gray-400 text-sm">© 2024 Protect Your Relationship. All rights reserved.</p>
-        </div>
-      </footer>
+          <Link href={checkoutLink} passHref>
+            <Button className="w-full max-w-xs bg-green-500 hover:bg-green-600 text-white text-lg py-3 rounded-lg">
+              Get Full Access Now!
+            </Button>
+          </Link>
+        </CardFooter>
+      </Card>
     </div>
   )
 }

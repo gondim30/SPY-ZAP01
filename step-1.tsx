@@ -39,7 +39,7 @@ export default function Step1() {
         <div className="space-y-4 w-full max-w-md">
           <Button
             onClick={() => handleSelection("male")}
-            className="w-full h-16 bg-green-500 hover:bg-green-600 text-white text-lg font-medium rounded-2xl flex items-center justify-start px-4 sm:px-6 gap-4"
+            className="w-full h-16 bg-green-500 hover:bg-green-600 text-white text-base md:text-lg font-medium rounded-2xl flex items-center justify-start px-4 sm:px-6 gap-4"
           >
             <div className="bg-white rounded-full p-2">
               <User className="h-6 w-6 text-green-500" />
@@ -49,7 +49,7 @@ export default function Step1() {
 
           <Button
             onClick={() => handleSelection("female")}
-            className="w-full h-16 bg-green-500 hover:bg-green-600 text-white text-lg font-medium rounded-2xl flex items-center justify-start px-4 sm:px-6 gap-4"
+            className="w-full h-16 bg-green-500 hover:bg-green-600 text-white text-base md:text-lg font-medium rounded-2xl flex items-center justify-start px-4 sm:px-6 gap-4"
           >
             <div className="bg-white rounded-full p-2">
               <User className="h-6 w-6 text-green-500" />
